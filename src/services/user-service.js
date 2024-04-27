@@ -33,7 +33,6 @@ class UserService {
             //step 3: If passwords match then create a aotken and send it to the user
             const newJWT = this.createToken({email: user.email, id: user.id})
             return newJWT;
-
         } catch (error) {
             console.log("Something went wrong in the signin process");
             throw error;
@@ -46,7 +45,7 @@ class UserService {
             if(!response){
                 throw {error: 'Invalid Token'}
             }
-            const user = this.userRepository.getById(response.id);
+            const user =await this.userRepository.getById(response.id);
             if(!user){
                 throw {error: 'No user  with the corresponding token exists'}
             }
